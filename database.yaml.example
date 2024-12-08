@@ -1,0 +1,23 @@
+&server_addr: &server_addr
+  type: A
+  values:
+    - 1.2.4.8
+
+example.com:
+  - type: SOA
+    values:
+      - ns1 hostmaster 0 3600 1200 604800 1800
+  - type: NS
+    values:
+      - ns1
+      - ns2
+  - host: ns1
+    <<: *server_addr
+  - host: ns1
+    <<: *server_addr
+  - host: www
+    type: CNAME
+    values:
+      - "@"
+  - type: ANAME
+    values: [example.net]
